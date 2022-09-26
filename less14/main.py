@@ -67,10 +67,10 @@ def det_by_date(year1, year2):
 
 @app.get("/rating/<rating>/")
 def get_by_rating(rating):
-    my_dict= [
+    my_dict= {
             "children": ("G", "G"),
             "family": ("G", "PG", "PG-13"),
-            "adult": ("R", "NC-17")]
+            "adult": ("R", "NC-17")}
 
 
     sql = f'''
@@ -92,7 +92,7 @@ def get_by_rating(rating):
     )
 
 
-@app.get("/genre/<genre>"/)
+@app.get("/genre/<genre>")
 def get_by_genre(genre):
     sql = f'''
             select title, description from netflix
@@ -123,7 +123,7 @@ where "cast" like '%{name1}%' and "cast" like '%{name2}%' '''
     result = get_value_from_db(sql)
 
     names_dict = {}
-    for item in result
+        for item in result
         names = set(dict(item).get("cast").split(", ")) - set(name1, name2)
 
         for name in names:
