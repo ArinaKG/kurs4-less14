@@ -15,7 +15,7 @@ def get_value_from_db(sql):
         return result
 
 
-@app.get("/movie/<title>")
+@app.get("/movie/<title>/")
 def get_value_by_title(title):
     sql = (f'select title, country, release_year, listed_in as genre, description from netflix\'\n'
            f'    where title = \'{title}\'\n'
@@ -29,7 +29,7 @@ def get_value_by_title(title):
         return dict(item)
 
 
-@app.get("/movie/<title>")
+@app.get("/movie/<title>/")
 def view_title(title):
     result = get_value_by_title(title)
     return app.response_class(
@@ -43,7 +43,7 @@ def view_title(title):
     )
 
 
-@app.get("/movie/<int:year1>/to/<int:year2>")
+@app.get("/movie/<int:year1>/to/<int:year2>/")
 def det_by_date(year1, year2):
     sql = f'''
             select title, release_year from netflix
@@ -65,12 +65,12 @@ def det_by_date(year1, year2):
     )
 
 
-@app.get("/rating/<rating>")
+@app.get("/rating/<rating>/")
 def get_by_rating(rating):
-    my_dict= ("children": ("G"),
-        "family": ("G", "PG", "PG-13"),
-        "adult": ("R", "NC-17")
-    )
+    my_dict= [
+            "children": ("G", "G"),
+            "family": ("G", "PG", "PG-13"),
+            "adult": ("R", "NC-17")]
 
 
     sql = f'''
@@ -92,7 +92,7 @@ def get_by_rating(rating):
     )
 
 
-@app.get("/genre/<genre>")
+@app.get("/genre/<genre>"/)
 def get_by_genre(genre):
     sql = f'''
             select title, description from netflix
