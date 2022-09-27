@@ -123,11 +123,11 @@ where "cast" like '%{name1}%' and "cast" like '%{name2}%' '''
     result = get_value_from_db(sql)
 
     names_dict = {}
-        for item in result
+    for item in result:
         names = set(dict(item).get("cast").split(", ")) - set(name1, name2)
 
-        for name in names:
-            names_dict[name.strip()] = names_dict.get(name.strip, 0) + 1
+    for name in names:
+        names_dict[name.strip()] = names_dict.get(name.strip, 0) + 1
 
     for key, value in names_dict.items():
         if value >2:
